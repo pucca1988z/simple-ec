@@ -12,17 +12,13 @@
         </svg>
       </button>
       <div v-show="showDropdown" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-2 ring-black ring-opacity-5">
-        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <div class="py-1 divide-y-2 divide-opacity-10 divide-black" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
           <!-- items in cart -->
-          <MiniCart v-for="(data, key) in testCartData" :key="key" :data="data"/>
-
-          
-          <div class="border mx-2"></div>
+          <MiniCart v-for="(data, key) in cart" :key="key" :data="data"/>
           <div class="flex justify-between px-4">
             <div class="py-2 text-sm text-gray-700 ">total: {{ getCartTotalPrice }}</div>
-            <div class=" text-blue-500 py-2 text-sm underline cursor-pointer ">Clear Cart</div>
+            <div class=" text-blue-500 py-2 text-sm underline cursor-pointer" @click="clearCart">Clear Cart</div>
           </div> 
-         
         </div>
       </div>
     </div>
@@ -41,9 +37,14 @@ export default {
       showDropdown: false
     }
   },
+  methods:{
+    clearCart(){
+      this.$store.dispatch('clearCart');
+    }
+  },
   computed:{
     ...mapState({
-      testCartData: state => state.cart
+      cart: state => state.cart
     }),
     ...mapGetters({
       getCartTotalPrice: 'getCartTotalPrice'
