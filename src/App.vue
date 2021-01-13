@@ -5,14 +5,18 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/> -->
-    blank
+    <AppHeader/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import './assets/styles/styles.css'
+import AppHeader from '@/components/AppHeader'
 export default {
-  
+  components:{
+    AppHeader
+  }
 }
 </script>
 
